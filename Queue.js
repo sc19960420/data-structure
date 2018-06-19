@@ -2,6 +2,8 @@
  * CircleQueue
  * 2018-06-14
  * sun sir
+ * 
+ * 先入先出
  */
 
 let CircleQueue = function (capacity){
@@ -84,15 +86,20 @@ let CircleQueue = function (capacity){
 
     // 遍历队列
     this.traverseQueue = function (){
-        // let queuesStr = '';
-        for(let index = _this.queueHead; index < _this.queueLength ; index ++){
-            console.log(index)
-            let element = _this.queue[index % _this.queueLength];
+        for(let index = _this.queueHead; index < _this.queueLength + _this.queueHead; index ++){
+            let element = _this.queue[index % _this.queueCapacity];
             console.log(element);
         }
-        // console.log('队列中元素 queuesStr = ' + queuesStr)
     }
 }
+
+let students = function (name,age,sex){
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+}
+let zhangsan = new students('张三',18,'男');
+console.log(zhangsan);
 
 let ins = new CircleQueue(5);
 ins.enQueue(10);
@@ -107,14 +114,10 @@ ins.deQueue(12)
 ins.deQueue(16)
 
 
-ins.enQueue(10);
-ins.enQueue(12);
-ins.enQueue(16);
+// ins.enQueue(10);
+// ins.enQueue(12);
+// ins.enQueue(16);
 
-console.log(ins.getQueueLength());
-console.log(ins);
-// ins.clearQueue();
-
-
+// js 是弱类型语言  队列操作 没有明显的类区分  int String 等 类型不限
 ins.traverseQueue();
 // console.log(ins);
