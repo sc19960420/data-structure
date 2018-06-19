@@ -43,7 +43,7 @@ let CircleStack = function (capacity){
 
     // 清空当前栈
     this.clearStack = function () {
-        
+
         _this.Stack.splice(0,_this.StackSize);
         _this.StackTop = 0;
     }
@@ -75,29 +75,68 @@ let CircleStack = function (capacity){
     }
 
     // 遍历栈内元素
-    this.traverseStack = function (){
+    this.traverseStack = function (ele){
         var StackStr = '';
-        for(let index = 0; index < _this.StackTop ; index ++){
-            StackStr += _this.Stack[index] + ',';
-            // console.log(_this.Stack[index]);
+        if(ele){
+            for(let index = _this.StackTop-1; index >= 0 ; index --){
+                StackStr += _this.Stack[index] + ',';
+                // console.log(_this.Stack[index]);
+            }
+        }else{
+            for(let index = 0; index < _this.StackTop ; index ++){
+                StackStr += _this.Stack[index] + ',';
+                // console.log(_this.Stack[index]);
+            }
         }
         console.log(StackStr);
     }
 }
 
-let ins = new CircleStack(5);
+let ins = new CircleStack(50);
 
 // ins.isStackEmpty();
 
-ins.enStack(5);
-ins.enStack(10);
-ins.enStack(15);
-ins.enStack(20);
-ins.enStack(25);
+// ins.enStack(5);
+// ins.enStack(10);
+// ins.enStack(15);
+// ins.enStack(20);
+// ins.enStack(25);
 
-ins.deStack(5);
+// ins.deStack(5);
 // ins.getStackLength();
-ins.getStackLength();
+// ins.getStackLength();
 
+// ins.traverseStack();
 
-ins.traverseStack();
+/**
+ * 2018-06-19 
+ * 
+ *  进制转化 
+ * 
+ *  10 -> 2 ||  10 -> 8 || 10 -> 16
+ */
+
+ let SystemNum = 16; // 进制
+ let remainder = 0; // 余数
+ let count = 2018;  // 10进制数字
+
+ while (count != 0) {
+    remainder = count % SystemNum;
+    remainder = chose(remainder);
+    ins.enStack(remainder);
+    count = Math.floor(count / SystemNum);
+ }
+
+ //  16进制换算
+ function chose(data){
+     console.log(data);
+     if(data == "10") data = "A";
+     if(data == "11") data = "B";
+     if(data == "12") data = "C";
+     if(data == "13") data = "D";
+     if(data == "14") data = "E";
+     if(data == "15") data = "F";
+     return data;
+ }
+ ins.traverseStack('data');
+
